@@ -62,7 +62,7 @@ public class Main {
     public static void main(String[] args) {
         int option = 1;
         while(option > 0){
-            System.out.println("Escolha um exercício do 1 ao 4: ");
+            System.out.println("Escolha um exercício do 1 ao 3: ");
             Scanner teclado = new Scanner(System.in);
             option = teclado.nextInt();
             switch(option) {
@@ -74,9 +74,6 @@ public class Main {
                     break;
                 case 3:
                     thirdExercise();
-                    break;
-                case 4:
-                    // code block
                     break;
                 default:
                     // code block
