@@ -4,12 +4,12 @@
         <q-list>
             <q-item-label header>
                 <div class="row justify-start" style="margin-top: -20px;">
-                    <span class="q-mt-xs">Maior nota: {{ maximun_grade }}</span>
+                    <span class="q-mt-xs">{{ $t('highest_grade') }}: {{ maximun_grade }}</span>
                 </div>
                 <q-separator class="q-mt-sm"/>
                 <div class="row justify-between">
-                    <span class="q-mt-xs">Estudantes</span>
-                    <q-btn size="sm" @click="$router.push({name: 'RegisterStudent'})" dense flat label="Adicionar Aluno" icon="add" />
+                    <span class="q-mt-xs">{{ $t('students') }}</span>
+                    <q-btn size="sm" @click="$router.push({name: 'RegisterStudent'})" dense flat :label="$t('add_student')" icon="add" />
                 </div>
             </q-item-label>
 

@@ -8,8 +8,19 @@
           round
         />
         <div class="col text-center text-weight-bold text-uppercase text-overline">
-          Registro de notas
+          <span>{{ $t('test_register') }}</span>
         </div>
+        <q-select
+          v-model="lang"
+          :options="langOptions"
+          dense
+          borderless
+          emit-value
+          map-options
+          options-dense
+          dark
+          style="max-width: 150px; margin-top: -4px;float: right;"
+        />
       </q-toolbar>
     </q-header>
 
@@ -25,24 +36,22 @@
           track-color="grey-3"
           class="q-ma-md"
         />
-        <div class="q-pa-md q-gutter-md">
-          <transition-group name="slide-up">
-            <div key="list_student_card">
-              <ListStudentsCard
-                @showStudentTests="showStudentTests"
-                :selected_student="selected_student"
-              />
-            </div>
-            <div key="show_student_card" v-if="has_student_selected && !loading">
-              <ShowStudentCard
-                :selected_student="selected_student"
-                :selected_student_tests="selected_student_tests"
-                @clearSelectedStudent="clearSelectedStudent"
-                @reload="getData()"
-              />
-            </div>
-          </transition-group>
-        </div>
+        <transition-group name="slide-up">
+          <div key="list_student_card">
+            <ListStudentsCard
+              @showStudentTests="showStudentTests"
+              :selected_student="selected_student"
+            />
+          </div>
+          <div key="show_student_card" v-if="has_student_selected && !loading">
+            <ShowStudentCard
+              :selected_student="selected_student"
+              :selected_student_tests="selected_student_tests"
+              @clearSelectedStudent="clearSelectedStudent"
+              @reload="getData()"
+            />
+          </div>
+        </transition-group>
         <router-view 
           @reload="getData()" 
           :selected_student="selected_student ? selected_student : null"
@@ -75,7 +84,12 @@ export default {
       dialog_register_student_test: false,
       has_student_selected: false,
       selected_student_tests: [],
-      selected_student: {}
+      selected_student: {},
+      lang: this.$i18n.locale,
+      langOptions: [
+        { value: 'en-US', label: 'English' },
+        { value: 'pt-BR', label: 'Portuguese' }
+      ]
     }
   },
   mounted () {
@@ -104,6 +118,11 @@ export default {
   },
   computed: {
     ...mapState('students', ['loading'])
+  },
+  watch: {
+    lang(lang) {
+      this.$i18n.locale = lang
+    }
   }
 }
 </script>
@@ -121,5 +140,8 @@ export default {
 }
 .slide-up-leave-active {
   position: absolute;
+}
+.q-field__native, .q-field__prefix, .q-field__suffix, .q-field__input{
+  color: white!important;
 }
 </style>
